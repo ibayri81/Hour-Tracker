@@ -98,7 +98,7 @@ function deleteEntry() {
 
 // Function to send data to Google Sheets
 function sendToGoogleSheets() {
-  const url = "https://script.google.com/macros/s/AKfycbz5lvZZMYjZ2BR4VnbF3JpmSJwM1nsxZBRC0cgVbg0wjqlmsZHc-_qjdibtff6pJYhNLA/exec"; // Replace with your Google Apps Script web app URL
+  const url = "https://script.google.com/macros/s/AKfycbzs9jvI45sHGm5GuUW1plwJg2DQeSBCzGbS8yqc-0pJ1E7sZ6KYFubgmLkLoiDDh2HM/exec"; // Replace with your Google Apps Script web app URL
 
   const payload = JSON.stringify(currentLog);
 
