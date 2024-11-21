@@ -98,17 +98,25 @@ function deleteEntry() {
 
 // Function to send data to Google Sheets
 function sendToGoogleSheets() {
-  const url = "https://script.google.com/macros/s/AKfycbzs9jvI45sHGm5GuUW1plwJg2DQeSBCzGbS8yqc-0pJ1E7sZ6KYFubgmLkLoiDDh2HM/exec"; // Replace with your Google Apps Script web app URL
+  const url = "PASTE_YOUR_WEB_APP_URL_HERE"; // Replace with your Google Apps Script Web App URL
 
-  const payload = JSON.stringify(currentLog);
+  console.log("Sending to URL:", url); // Debugging
+  console.log("Payload:", currentLog); // Debugging
 
   fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: payload,
+    body: JSON.stringify(currentLog),
+    mode: "cors", // Explicitly allow CORS
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then((data) => {
+      console.log("Response from server:", data); // Debug log
       if (data.status === "success") {
         alert("Data sent successfully!");
       } else {
@@ -116,7 +124,7 @@ function sendToGoogleSheets() {
       }
     })
     .catch((error) => {
-      console.error("Error sending data:", error);
+      console.error("Error sending data:", error); // Debugging
       alert("An error occurred. Please try again.");
     });
 }
@@ -129,5 +137,3 @@ document.getElementById("sendButton").addEventListener("click", function () {
   }
   sendToGoogleSheets();
 });
-
-
